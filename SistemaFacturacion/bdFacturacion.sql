@@ -13,7 +13,7 @@ insert into tblInventario values
 (158965, 'Mouse Inalámbrico M720 Triathlon 2.4GHZ ', 3127.00),
 (198654, 'Teclado K480 Bluetooth Negro', 3245.00),
 (169742, 'Teclado Microsoft Todo en 1', 2419.00),
-(1458763, 'Headset Netsys Stereo/USB c/Micrófono', 1770.00 ),
+(145863, 'Headset Netsys Stereo/USB c/Micrófono', 1770.00 ),
 (114789, 'Headset Inalámbrico Palladium Xtech c/Mic BG', 1121.00),
 (176548, 'Bulto Dell Pro 15', 2891.00),
 (104589, 'Mochila Dell 15.0" Pro Slim', 2714.00),

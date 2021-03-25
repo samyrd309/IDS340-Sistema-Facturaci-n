@@ -16,11 +16,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Leslie\\Documents\\Instituto Tecnológico de Santo Domingo - INTEC\\Materias\\Trimestre 3\\Desarrollo de Software I\\Proyecto Final\\SistemaFacturacion\\CapaNegocio\\CapaNegocio.csproj",
+      "projectUniqueName": "C:\\Users\\Leslie\\Source\\Repos\\samyrd309\\IDS340-Sistema-Facturacion\\SistemaFacturacion\\CapaNegocio\\CapaNegocio.csproj",
       "projectName": "CapaNegocio",
-      "projectPath": "C:\\Users\\Leslie\\Documents\\Instituto Tecnológico de Santo Domingo - INTEC\\Materias\\Trimestre 3\\Desarrollo de Software I\\Proyecto Final\\SistemaFacturacion\\CapaNegocio\\CapaNegocio.csproj",
+      "projectPath": "C:\\Users\\Leslie\\Source\\Repos\\samyrd309\\IDS340-Sistema-Facturacion\\SistemaFacturacion\\CapaNegocio\\CapaNegocio.csproj",
       "packagesPath": "C:\\Users\\Leslie\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Leslie\\Documents\\Instituto Tecnológico de Santo Domingo - INTEC\\Materias\\Trimestre 3\\Desarrollo de Software I\\Proyecto Final\\SistemaFacturacion\\CapaNegocio\\obj\\",
+      "outputPath": "C:\\Users\\Leslie\\Source\\Repos\\samyrd309\\IDS340-Sistema-Facturacion\\SistemaFacturacion\\CapaNegocio\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",

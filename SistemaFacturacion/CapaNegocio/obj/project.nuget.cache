@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "uykMpo7caMJFqcQF4R1V+ot6RwL6IuwPd6BW1FSTyheEIsn/lr9bO8S+gxJoR3+9u19C/V3xEuj5vcVbed03cg==",
+  "dgSpecHash": "ke0b5wRqwVlJ8TERbLLfeacrQLJ8jd7k9rm9zNV/tS7LA8G0xoKoBFjktgpZ8sqVVvSl6wG1UttuurjI6eDaKA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Leslie\\Documents\\Instituto Tecnológico de Santo Domingo - INTEC\\Materias\\Trimestre 3\\Desarrollo de Software I\\Proyecto Final\\SistemaFacturacion\\CapaNegocio\\CapaNegocio.csproj",
+  "projectFilePath": "C:\\Users\\Leslie\\Source\\Repos\\samyrd309\\IDS340-Sistema-Facturacion\\SistemaFacturacion\\CapaNegocio\\CapaNegocio.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
