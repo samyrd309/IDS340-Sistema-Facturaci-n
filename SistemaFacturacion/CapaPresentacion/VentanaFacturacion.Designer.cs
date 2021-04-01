@@ -30,7 +30,7 @@ namespace CapaPresentacion
 		private void InitializeComponent()
 		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VentanaFacturacion));
-			this.dataGridView1 = new System.Windows.Forms.DataGridView();
+			this.dgvDetalleFactura = new System.Windows.Forms.DataGridView();
 			this.txtCliente = new System.Windows.Forms.TextBox();
 			this.txtEmpleado = new System.Windows.Forms.TextBox();
 			this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
@@ -46,20 +46,20 @@ namespace CapaPresentacion
 			this.btnAgregar = new System.Windows.Forms.Button();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
-			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.dgvDetalleFactura)).BeginInit();
 			this.panel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			this.SuspendLayout();
 			// 
-			// dataGridView1
+			// dgvDetalleFactura
 			// 
-			this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
-			this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.dataGridView1.Location = new System.Drawing.Point(12, 271);
-			this.dataGridView1.Name = "dataGridView1";
-			this.dataGridView1.Size = new System.Drawing.Size(910, 276);
-			this.dataGridView1.TabIndex = 0;
+			this.dgvDetalleFactura.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
+			this.dgvDetalleFactura.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.dgvDetalleFactura.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.dgvDetalleFactura.Location = new System.Drawing.Point(12, 271);
+			this.dgvDetalleFactura.Name = "dgvDetalleFactura";
+			this.dgvDetalleFactura.Size = new System.Drawing.Size(910, 276);
+			this.dgvDetalleFactura.TabIndex = 0;
 			// 
 			// txtCliente
 			// 
@@ -230,10 +230,10 @@ namespace CapaPresentacion
 			this.Controls.Add(this.dateTimePicker1);
 			this.Controls.Add(this.txtEmpleado);
 			this.Controls.Add(this.txtCliente);
-			this.Controls.Add(this.dataGridView1);
+			this.Controls.Add(this.dgvDetalleFactura);
 			this.Name = "VentanaFacturacion";
 			this.Text = "VentanaFacturacion";
-			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.dgvDetalleFactura)).EndInit();
 			this.panel1.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
 			this.ResumeLayout(false);
@@ -242,8 +242,6 @@ namespace CapaPresentacion
 		}
 
 		#endregion
-
-		private System.Windows.Forms.DataGridView dataGridView1;
 		private System.Windows.Forms.TextBox txtCliente;
 		private System.Windows.Forms.TextBox txtEmpleado;
 		private System.Windows.Forms.DateTimePicker dateTimePicker1;
@@ -259,5 +257,6 @@ namespace CapaPresentacion
 		private System.Windows.Forms.Button btnAgregar;
 		private System.Windows.Forms.Panel panel1;
 		private System.Windows.Forms.PictureBox pictureBox1;
+		private System.Windows.Forms.DataGridView dgvDetalleFactura;
 	}
 }
