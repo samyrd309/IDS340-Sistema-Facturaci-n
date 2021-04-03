@@ -20,6 +20,7 @@ namespace CapaPresentacion
             InitializeComponent();
         }
 
+
         //Método para mostrar artículos enl DGV
         public void MostrarArt()
         {
