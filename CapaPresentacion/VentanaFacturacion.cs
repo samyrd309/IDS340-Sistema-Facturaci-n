@@ -37,7 +37,7 @@ namespace CapaPresentacion
             if (txtEmpleado.Text == "")
             {
                 ok = false;
-                errorProvider1.SetError(txtEmpleado, "Ingresar cliente");
+                errorProvider1.SetError(txtEmpleado, "Ingresar empleado");
 
             }
             else
@@ -47,7 +47,7 @@ namespace CapaPresentacion
             if (cmbTipoPago.Text == "")
             {
                 ok = false;
-                errorProvider1.SetError(cmbTipoPago, "Ingresar cliente");
+                errorProvider1.SetError(cmbTipoPago, "Seleccionar métod de pago");
 
             }
             else
@@ -130,7 +130,7 @@ namespace CapaPresentacion
                     default:
                         try
                         {
-                            MessageBox.Show("default");
+                            
                             ObjetoCN.CrearFactura(txtEmpleado.Text, txtCliente.Text, dateTimePicker1.Text, cmbTipoPago.Text);
                             LimpiarCampos();
                         }
@@ -140,7 +140,6 @@ namespace CapaPresentacion
                         }
                         break;
                     case true:
-                        MessageBox.Show("NCF");
                         try
                         {
                             ObjetoCN.CrearFacturaNCF(txtEmpleado.Text, txtCliente.Text, dateTimePicker1.Text, cmbTipoPago.Text, txtNCF.Text);
