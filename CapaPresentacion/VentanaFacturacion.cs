@@ -28,7 +28,7 @@ namespace CapaPresentacion
             {
                 ok = false;
                 errorProvider1.SetError(txtCliente, "Ingresar cliente");
-
+                //todo gvi
             }
             else
             {
