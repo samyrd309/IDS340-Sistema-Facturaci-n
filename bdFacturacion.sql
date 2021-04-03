@@ -51,36 +51,6 @@ impuesto money default 0.0,
 totalPagar money default 0.0
 )
 
-select *from tblFactura
-insert into tblFactura values ('','',10/10/2020,'',default, default, default, default)
-
-create proc procCrearFactura
-@empleado varchar(40),
-@nombreCliente varchar(40),
-@fechaEmision datetime,
-@tipoFactura varchar(25)
-as
-insert into tblFactura values (@empleado,@nombreCliente,@fechaEmision,@tipoFactura,default, default, default, default)
-go
-
-create proc procCrearFacturaNCF
-@empleado varchar(40),
-@nombreCliente varchar(40),
-@fechaEmision datetime,
-@tipoFactura varchar(25),
-@NCF varchar(15)
-as
-insert into tblFactura values (@empleado,@nombreCliente,@fechaEmision,@tipoFactura,@NCF, default, default, default)
-go
-
-drop proc procCrearFactura
-
-exec procCrearFacturaNCF '','','','','NCF'
-
-insert into tblFactura values (1,'','',10/10/2021,'',default,15.00,15.00,15.00)
-
-select *from tblFactura
-
 -- Tabla DetalleFactura --
 create table tblDetalleFactura
 (
@@ -128,6 +98,23 @@ select articulo as 'Artículo', cantidad as 'Cantidad' , precio as 'Precio', tot
 from tblDetalleFactura
 go
 
+create proc procCrearFactura
+@empleado varchar(40),
+@nombreCliente varchar(40),
+@fechaEmision datetime,
+@tipoFactura varchar(25)
+as
+insert into tblFactura values (@empleado,@nombreCliente,@fechaEmision,@tipoFactura,default, default, default, default)
+go
 
+create proc procCrearFacturaNCF
+@empleado varchar(40),
+@nombreCliente varchar(40),
+@fechaEmision datetime,
+@tipoFactura varchar(25),
+@NCF varchar(15)
+as
+insert into tblFactura values (@empleado,@nombreCliente,@fechaEmision,@tipoFactura,@NCF, default, default, default)
+go
 
 exec procMostrarArt

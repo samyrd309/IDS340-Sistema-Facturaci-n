@@ -30,6 +30,7 @@ namespace CapaPresentacion
 		/// </summary>
 		private void InitializeComponent()
 		{
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VentanaFacturacion));
             this.dgvDetalleFactura = new System.Windows.Forms.DataGridView();
             this.txtCliente = new System.Windows.Forms.TextBox();
@@ -54,10 +55,12 @@ namespace CapaPresentacion
             this.label1 = new System.Windows.Forms.Label();
             this.txtNCF = new System.Windows.Forms.TextBox();
             this.cmbTipoPago = new System.Windows.Forms.ComboBox();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalleFactura)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudCantidad)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvDetalleFactura
@@ -304,6 +307,10 @@ namespace CapaPresentacion
             this.cmbTipoPago.Size = new System.Drawing.Size(216, 21);
             this.cmbTipoPago.TabIndex = 22;
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // VentanaFacturacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -339,6 +346,7 @@ namespace CapaPresentacion
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudCantidad)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -368,5 +376,6 @@ namespace CapaPresentacion
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtNCF;
         private System.Windows.Forms.ComboBox cmbTipoPago;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

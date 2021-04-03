@@ -19,7 +19,43 @@ namespace CapaPresentacion
         {
             InitializeComponent();
         }
+        //Validación
 
+        private bool ValidarCampos()
+        {
+            bool ok = true;
+            if (txtCliente.Text == "")
+            {
+                ok = false;
+                errorProvider1.SetError(txtCliente, "Ingresar cliente");
+
+            }
+            else
+            {
+                errorProvider1.SetError(txtCliente, "");
+            }
+            if (txtEmpleado.Text == "")
+            {
+                ok = false;
+                errorProvider1.SetError(txtEmpleado, "Ingresar cliente");
+
+            }
+            else
+            {
+                errorProvider1.SetError(txtEmpleado, "");
+            }
+            if (cmbTipoPago.Text == "")
+            {
+                ok = false;
+                errorProvider1.SetError(cmbTipoPago, "Ingresar cliente");
+
+            }
+            else
+            {
+                errorProvider1.SetError(cmbTipoPago, "");
+            }
+            return ok;
+        }
 
         //Método para mostrar artículos enl DGV
         public void MostrarArt()
@@ -83,40 +119,44 @@ namespace CapaPresentacion
 
         private void btnNuevo_Click(object sender, EventArgs e)
         {
-            switch (rbNFC.Checked)
+            if (ValidarCampos() == false)
             {
-                default:
-                    try
-                    {
-                        MessageBox.Show("default");
-                        ObjetoCN.CrearFactura(txtEmpleado.Text, txtCliente.Text, dateTimePicker1.Text, cmbTipoPago.Text);
-                        LimpiarCampos();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("error" + ex);
-                    }
-                    break;
-                case true:
-                    MessageBox.Show("NCF");
-                    try
-                    {
-                        ObjetoCN.CrearFacturaNCF(txtEmpleado.Text, txtCliente.Text, dateTimePicker1.Text, cmbTipoPago.Text, txtNCF.Text);
-                        LimpiarCampos();
-                    }
-                    catch(Exception ex)
-                    {
-                        MessageBox.Show("error" + ex);
-                    }
-                    break;
+                MessageBox.Show("Llenar campos");
+            }
+            else
+            {
+                switch (rbNFC.Checked)
+                {
+                    default:
+                        try
+                        {
+                            MessageBox.Show("default");
+                            ObjetoCN.CrearFactura(txtEmpleado.Text, txtCliente.Text, dateTimePicker1.Text, cmbTipoPago.Text);
+                            LimpiarCampos();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("error" + ex);
+                        }
+                        break;
+                    case true:
+                        MessageBox.Show("NCF");
+                        try
+                        {
+                            ObjetoCN.CrearFacturaNCF(txtEmpleado.Text, txtCliente.Text, dateTimePicker1.Text, cmbTipoPago.Text, txtNCF.Text);
+                            LimpiarCampos();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("error" + ex);
+                        }
+                        break;
 
+                }
             }
             
             
             
         }
     }
-
-        
-    
 }
