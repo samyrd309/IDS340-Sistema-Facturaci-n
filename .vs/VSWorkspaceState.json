@@ -1,13 +1,6 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\SistemaFacturacion",
-    "\\SistemaFacturacion\\CapaDatos",
-    "\\SistemaFacturacion\\CapaNegocio",
-    "\\SistemaFacturacion\\CapaPresentacion",
-    "\\SistemaFacturacion\\Capa_Datos",
-    "\\SistemaFacturacion\\Capa_Negocio"
+    ""
   ],
-  "SelectedNode": "\\SistemaFacturacion",
   "PreviewInSolutionExplorer": false
 }

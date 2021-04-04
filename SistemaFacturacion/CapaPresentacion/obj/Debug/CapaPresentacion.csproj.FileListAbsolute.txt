@@ -38,3 +38,9 @@ C:\Users\Samuel\Desktop\SistemaFacturacion\CapaPresentacion\obj\Debug\CapaPresen
 C:\Users\Samuel\Desktop\SistemaFacturacion\CapaPresentacion\obj\Debug\CapaPresentacion.csproj.CopyComplete
 C:\Users\Samuel\Desktop\SistemaFacturacion\CapaPresentacion\obj\Debug\CapaPresentacion.exe
 C:\Users\Samuel\Desktop\SistemaFacturacion\CapaPresentacion\obj\Debug\CapaPresentacion.pdb
+C:\Users\Leslie\Source\Repos\samyrd309\IDS340-Sistema-Facturacion\SistemaFacturacion\CapaPresentacion\bin\Debug\Capa_Negocio.dll
+C:\Users\Leslie\Source\Repos\samyrd309\IDS340-Sistema-Facturacion\SistemaFacturacion\CapaPresentacion\bin\Debug\Capa_Datos.dll
+C:\Users\Leslie\Source\Repos\samyrd309\IDS340-Sistema-Facturacion\SistemaFacturacion\CapaPresentacion\bin\Debug\Capa_Negocio.pdb
+C:\Users\Leslie\Source\Repos\samyrd309\IDS340-Sistema-Facturacion\SistemaFacturacion\CapaPresentacion\bin\Debug\Capa_Datos.pdb
+C:\Users\Leslie\Source\Repos\samyrd309\IDS340-Sistema-Facturacion\SistemaFacturacion\CapaPresentacion\obj\Debug\CapaPresentacion.csproj.CopyComplete
+C:\Users\Leslie\Source\Repos\samyrd309\IDS340-Sistema-Facturacion\SistemaFacturacion\CapaPresentacion\obj\Debug\CapaPresentacion.VentanaCancelarFactura.resources

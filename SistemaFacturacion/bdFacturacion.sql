@@ -9,7 +9,6 @@ precio money,
 cantidad tinyint
 )
 
-
 insert into tblInventario values
 (125693 ,'Mouse Ergonomico Logitech MX Vertical Advance', 4602.00, 1),
 (158965, 'Mouse Inalámbrico M720 Triathlon 2.4GHZ ', 3127.00, 1),
@@ -53,33 +52,37 @@ totalPagar money default 0.0
 
 select *from tblFactura
 insert into tblFactura values ('','',10/10/2020,'',default, default, default, default)
+insert into tblFactura values (1,'','',10/10/2021,'',default,15.00,15.00,15.00)
 
+-- PROCEDIMIENTO CREAR FACTURA CONSUMIDOR FINAL
 create proc procCrearFactura
 @empleado varchar(40),
 @nombreCliente varchar(40),
-@fechaEmision datetime,
-@tipoFactura varchar(25)
+@fechaEmision date,
+@tipoFactura varchar(25),
+@subtotal money,
+@impuesto money,
+@totalPagar money
 as
-insert into tblFactura values (@empleado,@nombreCliente,@fechaEmision,@tipoFactura,default, default, default, default)
+insert into tblFactura values (@empleado,@nombreCliente,@fechaEmision,@tipoFactura,default, @subtotal, @impuesto, @totalPagar)
 go
 
+-- PROCEDIMIENTO CREAR FACTURA CON NCF
 create proc procCrearFacturaNCF
 @empleado varchar(40),
 @nombreCliente varchar(40),
 @fechaEmision datetime,
 @tipoFactura varchar(25),
-@NCF varchar(15)
+@NCF varchar(15),
+@subtotal money,
+@impuesto money,
+@totalPagar money
 as
-insert into tblFactura values (@empleado,@nombreCliente,@fechaEmision,@tipoFactura,@NCF, default, default, default)
+insert into tblFactura values (@empleado,@nombreCliente,@fechaEmision,@tipoFactura, @NCF, @subtotal, @impuesto, @totalPagar)
 go
-
-drop proc procCrearFactura
 
 exec procCrearFacturaNCF '','','','','NCF'
 
-insert into tblFactura values (1,'','',10/10/2021,'',default,15.00,15.00,15.00)
-
-select *from tblFactura
 
 -- Tabla DetalleFactura --
 create table tblDetalleFactura
@@ -96,12 +99,9 @@ razonSocial varchar(40),
 fechaEmision datetime
 )
 
-
-
-select *from tblInventario
 select *from tblDetalleFactura
 
--- PROCEDIMIENTO
+-- PROCEDIMIENTO AGREGAR ARTÍCULOS
 create proc procLlamarArt
 @codigoArticulo int, @cantidad tinyint
 as
@@ -113,6 +113,7 @@ update tblDetalleFactura set cantidad = @cantidad
 where codigoArticulo like @codigoArticulo
 go
 
+-- PROCEDIMIENTO PARA MODIFICAR NCF
 create proc procAgregarNCF
 @codigoFactura tinyint, @NCF varchar(15)
 as
@@ -122,12 +123,15 @@ go
 
 exec procAgregarNCF 1,'1'
 
+-- PROCEDIMIENTO PARA MOSTRAR ARTÍCULOS
 create proc procMostrarArt
 as
 select articulo as 'Artículo', cantidad as 'Cantidad' , precio as 'Precio', totalArt as 'Total por artículo', NCF as 'NCF'
 from tblDetalleFactura
 go
 
-
-
-exec procMostrarArt
+-- PROCEDIMIENTO PARA VACIAR tblDetalleFactura
+create proc procLimpiarDetalleFactura
+as
+truncate table tblDetalleFactura
+go

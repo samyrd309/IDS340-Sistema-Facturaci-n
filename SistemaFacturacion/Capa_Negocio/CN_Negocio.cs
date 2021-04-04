@@ -20,31 +20,42 @@ namespace Capa_Negocio
 
         CD_Datos ObjetoCD = new CD_Datos();
 
-        public void extraerArt(string codigoArt, string cantidadArt)
-        {
-            ObjetoCD.extraerArt(int.Parse(codigoArt), int.Parse(cantidadArt));
-        }
-
-        public void CrearFactura(string empleado, string cliente, string fecha, string tipoFactura)
-        {
-            ObjetoCD.CrearFactura(empleado, cliente, fecha, tipoFactura);
-        }
-
-        public void CrearFacturaNCF(string empleado, string cliente, string fecha, string tipoFactura, string NCF)
-        {
-            ObjetoCD.CrearFacturaNCF(empleado, cliente, fecha, tipoFactura, NCF);
-        }
-
-        public void AgregarNCF(string codigoFactura, string NCF)
-        {
-            ObjetoCD.AgregarNCF(int.Parse(codigoFactura), NCF);
-        }
-
+        // Función para mostrar los artículos de la factura
         public DataTable MostrarArt()
         {
             DataTable Tabla = new DataTable();
             Tabla = ObjetoCD.MostrarArt();
             return Tabla;
         }
+
+        // Función extraer artículos de tabla inventario
+        public void extraerArt(string codigoArt, string cantidadArt)
+        {
+            ObjetoCD.extraerArt(int.Parse(codigoArt), int.Parse(cantidadArt));
+        }
+
+        // Función crear factura
+        public void CrearFactura(string empleado, string cliente, string fecha, string tipoFactura, string subtotal, string impuesto, string totalPagar)
+        {
+            ObjetoCD.CrearFactura(empleado, cliente, fecha, tipoFactura, Convert.ToDouble(subtotal), Convert.ToDouble(impuesto), Convert.ToDouble(totalPagar));
+        }
+
+        // Función crear factura con NCF
+        public void CrearFacturaNCF(string empleado, string cliente, string fecha, string tipoFactura, string NCF, string subtotal, string impuesto, string totalPagar)
+        {
+            ObjetoCD.CrearFacturaNCF(empleado, cliente, fecha, tipoFactura, NCF, Convert.ToDouble(subtotal), Convert.ToDouble(impuesto), Convert.ToDouble(totalPagar));
+        }
+
+        // Funcion agregar NCF  a una factura particular
+        public void AgregarNCF(string codigoFactura, string NCF)
+        {
+            ObjetoCD.AgregarNCF(int.Parse(codigoFactura), NCF);
+        }
+
+        // Función para limpiar los artículos de la factura
+        public void LimpiarTablaDetalle()
+		{
+            ObjetoCD.LimpiarTablaDetalle();
+		}
     }
 }
