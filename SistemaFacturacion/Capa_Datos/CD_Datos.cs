@@ -91,5 +91,17 @@ namespace Capa_Datos
 			Comando.CommandType = CommandType.StoredProcedure;
 			Comando.ExecuteNonQuery();
 		}
+
+		// Procedimiento almacenado para agregar el monto total correspondiente a ITBIS y total a pagar 
+		public void AgregarITBISTOTAL (double ITBIS, double totalPagar)
+		{
+			Comando.Connection = Conexion.AbrirConexion();
+			Comando.CommandText = "procIngresarITBISTOTAL";
+			Comando.CommandType = CommandType.StoredProcedure;
+			Comando.Parameters.AddWithValue("@ITBIS", ITBIS);
+			Comando.Parameters.AddWithValue("@Total", totalPagar);
+			Comando.ExecuteNonQuery();
+			Comando.Parameters.Clear();
+		}
 	}
 }

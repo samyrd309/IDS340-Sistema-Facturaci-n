@@ -1,4 +1,5 @@
 ﻿create database bdFacturacion
+use bdFacturacion
 
 -- Tabla inventario --
 create table tblInventario
@@ -35,6 +36,7 @@ insert into tblInventario values
 (222877, 'Base Argom p/Celular de Carro (ARG-AC-0325)', 324.50, 1),
 (222813, 'Cargador Maxell USB CAR 1PT 2.4A Negro (347408)', 383.00, 1)
 
+select * from tblInventario
 
 -- Tabla Factura --
 create table tblFactura
@@ -87,6 +89,7 @@ exec procCrearFacturaNCF '','','','','NCF'
 -- Tabla DetalleFactura --
 create table tblDetalleFactura
 (
+idControl tinyint identity (1,1),
 empleado varchar(40),
 nombreCliente varchar(40),
 codigoArticulo int,
@@ -96,7 +99,9 @@ precio money,
 totalArt as cantidad * precio,
 NCF varchar(15) DEFAULT 'N/A',
 razonSocial varchar(40),
-fechaEmision datetime
+fechaEmision datetime,
+montoITBIS money default ' ',
+totalPagar money default ' '
 )
 
 select *from tblDetalleFactura
@@ -135,3 +140,20 @@ create proc procLimpiarDetalleFactura
 as
 truncate table tblDetalleFactura
 go
+
+-- PROCEDIMIENTO PARA ACTUALIZAR EL ITBIS Y TOTAL EN tblDetalleFactura
+create proc procIngresarITBISTOTAL
+@ITBIS money,
+@Total money
+as
+update tblDetalleFactura set montoITBIS = @ITBIS, totalPagar = @Total 
+go
+
+-- PROCEDIMIENTO PARA MOSTRAR ARTÍCULOS
+create proc procMostrarFactura
+as
+select articulo as 'Artículo', cantidad as 'Cantidad' , precio as 'Precio', totalArt as 'Total por artículo', NCF as 'NCF', montoITBIS as 'ITBIS', totalPagar as 'Total a pagar'
+from tblDetalleFactura
+go
+
+select *from tblDetalleFactura

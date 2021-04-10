@@ -57,5 +57,11 @@ namespace Capa_Negocio
 		{
             ObjetoCD.LimpiarTablaDetalle();
 		}
+
+        // Función para agregar ITBIS y total a pagar de la factura
+        public void AgregarITBISTOTAL (string ITBIS, string totalPagar)
+        {
+            ObjetoCD.AgregarITBISTOTAL(Convert.ToDouble(ITBIS), Convert.ToDouble(totalPagar));
+        }
     }
 }

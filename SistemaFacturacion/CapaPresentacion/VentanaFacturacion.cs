@@ -9,6 +9,12 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Capa_Negocio;
 
+
+using CrystalDecisions.CrystalReports.Engine;
+using CrystalDecisions.Shared;
+
+
+
 namespace CapaPresentacion
 {
 	public partial class VentanaFacturacion : Form
@@ -92,16 +98,49 @@ namespace CapaPresentacion
 		// Botón GENERAR FACTURA; indica la devuelta del cliente y genera la impresión de la factura
 		private void btnCrearFactura_Click(object sender, EventArgs e)
 		{
-			// Efectivo y cambio
-			if (txtEfectivo.Text != "")
-			{
-				lblCambio.Text = (Math.Round(Convert.ToDouble(txtEfectivo.Text) - Convert.ToDouble(lblTotalPagar.Text))).ToString();
-				restaurarFacturacion();
-			}
-			else
-				MessageBox.Show("Indique el monto en efectivo.", "Complete los campos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+
+            // Efectivo y cambio
+            if (txtEfectivo.Text != "")
+            {
+                lblCambio.Text = (Math.Round(Convert.ToDouble(txtEfectivo.Text) - Convert.ToDouble(lblTotalPagar.Text))).ToString();
+                restaurarFacturacion();
+
+				ObjetoCN.AgregarITBISTOTAL(lblMontoITBIS.Text, lblTotalPagar.Text);
+				#region Generar reporte(Factura)
+
+
+				//Estancia del Reporte
+				FrmFactura form = new FrmFactura();
+                ReportDocument oRep = new ReportDocument();
+                ParameterField pf = new ParameterField();
+                ParameterFields pfs = new ParameterFields();
+                ParameterDiscreteValue pdv = new ParameterDiscreteValue();
+
+                // variable del procedimiento almacenado
+                pf.Name = "@procMostrarFactura";
+                pf.CurrentValues.Add(pdv);
+                pfs.Add(pf);
+
+
+                oRep.Load(@"C:\Users\Leone\Source\Repos\samyrd309\IDS340-Sistema-Facturacion\SistemaFacturacion\CapaPresentacion\RptFactura.rpt");
+                form.crystalReportViewer1.ReportSource = oRep;
+                form.Show();
+
+                //Exportar Reporte a PDF
+                oRep.ExportToDisk(ExportFormatType.PortableDocFormat, @"C:\Users\Leone\Downloads\factura.pdf");
+                #endregion
+
+            }
+            else
+                MessageBox.Show("Indique el monto en efectivo.", "Complete los campos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            ObjetoCN.AgregarITBISTOTAL(lblMontoITBIS.Text, lblTotalPagar.Text);
 
 			
+
+
+
 			// Inserta los campos de NCF y tipo de factura en función de la opción seleccionada
 			switch (rbNFC.Checked)
 			{

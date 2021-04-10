@@ -9,7 +9,7 @@ namespace Capa_Datos
       */
 	class CD_Conexion
 	{
-		static private string CadenaConexion = "Server= WINDOWS-OHFND69\\VGONZALEZ; DataBase= bdFacturacion; Integrated Security = true";
+		static private string CadenaConexion = "Server= DESKTOP-N5QUTDQ; DataBase= bdFacturacion; Integrated Security = true";
 		private SqlConnection Conexion = new SqlConnection(CadenaConexion);
 
 		//Método que se encarga de abrir la conexión SQL
