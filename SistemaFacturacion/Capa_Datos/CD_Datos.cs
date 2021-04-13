@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace Capa_Datos
@@ -102,6 +103,19 @@ namespace Capa_Datos
 			Comando.Parameters.AddWithValue("@Total", totalPagar);
 			Comando.ExecuteNonQuery();
 			Comando.Parameters.Clear();
+		}
+
+		//Funcion para validar existencia de datos
+		public bool ExisteRegistro(string id, string query)
+		{
+			SqlCommand cmd = new SqlCommand(query, Conexion.AbrirConexion());
+			cmd.Parameters.AddWithValue("@Id", id);
+
+			int count = Convert.ToInt32(cmd.ExecuteScalar());
+			if (count == 0)
+				return false;
+			else
+				return true;
 		}
 	}
 }

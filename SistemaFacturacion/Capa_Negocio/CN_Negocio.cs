@@ -17,7 +17,6 @@ namespace Capa_Negocio
   */
     public class CN_Negocio
     {
-
         CD_Datos ObjetoCD = new CD_Datos();
 
         // Función para mostrar los artículos de la factura
@@ -54,14 +53,20 @@ namespace Capa_Negocio
 
         // Función para limpiar los artículos de la factura
         public void LimpiarTablaDetalle()
-		{
+        {
             ObjetoCD.LimpiarTablaDetalle();
-		}
+        }
 
         // Función para agregar ITBIS y total a pagar de la factura
-        public void AgregarITBISTOTAL (string ITBIS, string totalPagar)
+        public void AgregarITBISTOTAL(string ITBIS, string totalPagar)
         {
             ObjetoCD.AgregarITBISTOTAL(Convert.ToDouble(ITBIS), Convert.ToDouble(totalPagar));
+        }
+
+        // Función para encontrar registros iguales
+        public bool ExisteRegistro(string id, string query)
+        {
+            return ObjetoCD.ExisteRegistro(id, query);
         }
     }
 }

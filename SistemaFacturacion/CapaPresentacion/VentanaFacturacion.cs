@@ -26,9 +26,6 @@ namespace CapaPresentacion
 		bool bnuevaFactura = false;
 		bool bfacturaCompleta = false;
 
-		// Variable para el control de facturas
-		public byte intentosRestantes = 5;
-
 		public VentanaFacturacion()
 		{
 			InitializeComponent();
@@ -45,6 +42,7 @@ namespace CapaPresentacion
 		//Evento para mostrar los artículos una vez cargue la ventana
 		private void VentanaFacturacion_Load(object sender, EventArgs e)
 		{
+			ObjetoCN.LimpiarTablaDetalle();
 			MostrarArt();
 		}
 
@@ -53,8 +51,21 @@ namespace CapaPresentacion
 		{
 			try
 			{
-				ObjetoCN.extraerArt(txtCodigoArt.Text, nudCantidad.Text);
-				MostrarArt();
+				string query = "SELECT COUNT(*) FROM tblDetalleFactura WHERE codigoArticulo=@Id";
+
+				if (ObjetoCN.ExisteRegistro(txtCodigoArt.Text, query) == false)
+				{
+					ObjetoCN.extraerArt(txtCodigoArt.Text, nudCantidad.Text);
+					MostrarArt();
+					txtCodigoArt.Clear();
+					nudCantidad.Value = 1;
+				}
+				else
+				{
+					MessageBox.Show("El artículo ingresado ya existe. Intente con otro código.", "Artículo existente", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					txtCodigoArt.Clear();
+					nudCantidad.Value = 1;
+				}
 			}
 			catch (Exception)
 			{
@@ -103,33 +114,38 @@ namespace CapaPresentacion
             // Efectivo y cambio
             if (txtEfectivo.Text != "")
             {
-                lblCambio.Text = (Math.Round(Convert.ToDouble(txtEfectivo.Text) - Convert.ToDouble(lblTotalPagar.Text))).ToString();
-                restaurarFacturacion();
+				double vCambio = Math.Round(Convert.ToDouble(txtEfectivo.Text) - Convert.ToDouble(lblTotalPagar.Text));
 
-				ObjetoCN.AgregarITBISTOTAL(lblMontoITBIS.Text, lblTotalPagar.Text);
-				#region Generar reporte(Factura)
+				if (Convert.ToDouble(txtEfectivo.Text) < Convert.ToDouble(lblTotalPagar.Text))
+					MessageBox.Show("El monto es insuficiente. Intente nuevamente.", "Monto insuficiente", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				else
+				{
+					lblCambio.Text = $"{vCambio}";
+					restaurarFacturacion();
+					ObjetoCN.AgregarITBISTOTAL(lblMontoITBIS.Text, lblTotalPagar.Text);
+					#region Generar reporte(Factura)
+
+					//Estancia del Reporte
+					FrmFactura form = new FrmFactura();
+					ReportDocument oRep = new ReportDocument();
+					ParameterField pf = new ParameterField();
+					ParameterFields pfs = new ParameterFields();
+					ParameterDiscreteValue pdv = new ParameterDiscreteValue();
+
+					// variable del procedimiento almacenado
+					pf.Name = "@procMostrarFactura";
+					pf.CurrentValues.Add(pdv);
+					pfs.Add(pf);
 
 
-				//Estancia del Reporte
-				FrmFactura form = new FrmFactura();
-                ReportDocument oRep = new ReportDocument();
-                ParameterField pf = new ParameterField();
-                ParameterFields pfs = new ParameterFields();
-                ParameterDiscreteValue pdv = new ParameterDiscreteValue();
+					oRep.Load(@"C:\Users\Deivy\Source\Repos\samyrd309\IDS340-Sistema-Facturacion\SistemaFacturacion\CapaPresentacion\rptFactur.rpt");
+					form.crystalReportViewer1.ReportSource = oRep;
+					form.Show();
 
-                // variable del procedimiento almacenado
-                pf.Name = "@procMostrarFactura";
-                pf.CurrentValues.Add(pdv);
-                pfs.Add(pf);
-
-
-                oRep.Load(@"C:\Users\Deivy\Source\Repos\IDS340-Sistema-Facturacion\SistemaFacturacion\CapaPresentacion\rptFactura.rpt");
-                form.crystalReportViewer1.ReportSource = oRep;
-                form.Show();
-
-                //Exportar Reporte a PDF
-                oRep.ExportToDisk(ExportFormatType.PortableDocFormat, @"C:\Users\Deivy\Downloads\factura.pdf");
-                #endregion
+					//Exportar Reporte a PDF
+					oRep.ExportToDisk(ExportFormatType.PortableDocFormat, @"C:\Users\Deivy\Downloads\factura.pdf");
+					#endregion
+				}
 
             }
             else
@@ -138,24 +154,16 @@ namespace CapaPresentacion
             ObjetoCN.AgregarITBISTOTAL(lblMontoITBIS.Text, lblTotalPagar.Text);
 
 			
-
-
-
 			// Inserta los campos de NCF y tipo de factura en función de la opción seleccionada
 			switch (rbNFC.Checked)
 			{
 				default:
 					try
 					{
-						if (txtCliente.Text.Trim() != "" || txtEmpleado.Text.Trim() != "")
-						{
-							ObjetoCN.CrearFactura(txtEmpleado.Text, txtCliente.Text, dateTimePicker1.Text, "Consumidor final", lblMontoPago.Text, lblMontoITBIS.Text, lblTotalPagar.Text);							
-						}
-						else
-						{
-							MessageBox.Show("Debe indicar el nombre del cliente y empleado.", "¡ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-						}
-
+						if (txtCliente.Text.Trim() != "" || txtEmpleado.Text.Trim() != "")						
+							ObjetoCN.CrearFactura(txtEmpleado.Text, txtCliente.Text, dateTimePicker1.Text, "Consumidor final", lblMontoPago.Text, lblMontoITBIS.Text, lblTotalPagar.Text);													
+						else						
+							MessageBox.Show("Debe indicar el nombre del cliente y empleado.", "¡ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Error);						
 					}
 					catch (Exception ex)
 					{
@@ -166,14 +174,10 @@ namespace CapaPresentacion
 				case true:
 					try
 					{
-						if (txtCliente.Text.Trim() != "" || txtEmpleado.Text.Trim() != "")
-						{
+						if (txtCliente.Text.Trim() != "" || txtEmpleado.Text.Trim() != "")						
 							ObjetoCN.CrearFacturaNCF(txtEmpleado.Text, txtCliente.Text, dateTimePicker1.Text, "Crédito fiscal", txtNCF.Text, lblMontoPago.Text, lblMontoITBIS.Text, lblTotalPagar.Text);
-						}
 						else
-						{
 							MessageBox.Show("Debe indicar el nombre del cliente y empleado.", "¡ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-						}
 					}
 					catch (Exception ex)
 					{
@@ -188,17 +192,13 @@ namespace CapaPresentacion
 		private void rbNFC_CheckedChanged(object sender, EventArgs e)
 		{
 			if (rbNFC.Checked == true)
-			{
 				txtNCF.Enabled = true;
-			}
 		}
 
 		private void rbConsumidorFinal_CheckedChanged(object sender, EventArgs e)
 		{
 			if (rbConsumidorFinal.Checked == true)
-			{
 				txtNCF.Enabled = false;
-			}
 		}
 
 		//////// MÉTODOS LIMPIEZA CAMPOS ////////
@@ -208,9 +208,7 @@ namespace CapaPresentacion
 		{
 			txtCodigoArt.Text = "";
 			nudCantidad.Value = 1;
-
 			txtCliente.Text = "";
-			txtEmpleado.Text = "";
 		}
 
 		//Método para limpiar los campos de pago
@@ -241,14 +239,13 @@ namespace CapaPresentacion
 						btnAgregar.Enabled = true;
 						btnFacturar.Enabled = true;
 						btnCancelarFactura.Enabled = true;
-						txtEmpleado.Enabled = true;
 						txtCliente.Enabled = true;
 						txtCodigoArt.Enabled = true;
 						nudCantidad.Enabled = true;
 						rbConsumidorFinal.Enabled = true;
 						rbNFC.Enabled = true;
 						txtEfectivo.Enabled = true;
-						txtNCF.Enabled = true;
+						txtNCF.Enabled = false;
 					}
 					break;
 
@@ -258,7 +255,6 @@ namespace CapaPresentacion
 						btnAgregar.Enabled = false;
 						btnFacturar.Enabled = false;
 						btnCancelarFactura.Enabled = false;
-						txtEmpleado.Enabled = false;
 						txtCliente.Enabled = false;
 						txtCodigoArt.Enabled = false;
 						nudCantidad.Enabled = false;

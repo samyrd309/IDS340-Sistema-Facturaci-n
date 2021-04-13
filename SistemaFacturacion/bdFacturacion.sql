@@ -36,8 +36,6 @@ insert into tblInventario values
 (222877, 'Base Argom p/Celular de Carro (ARG-AC-0325)', 324.50, 1),
 (222813, 'Cargador Maxell USB CAR 1PT 2.4A Negro (347408)', 383.00, 1)
 
-select * from tblInventario
-
 -- Tabla Factura --
 create table tblFactura
 (
@@ -51,10 +49,6 @@ subtotal money default 0.0,
 impuesto money default 0.0,
 totalPagar money default 0.0
 )
-
-select *from tblFactura
-insert into tblFactura values ('','',10/10/2020,'',default, default, default, default)
-insert into tblFactura values (1,'','',10/10/2021,'',default,15.00,15.00,15.00)
 
 -- PROCEDIMIENTO CREAR FACTURA CONSUMIDOR FINAL
 create proc procCrearFactura
@@ -83,9 +77,6 @@ as
 insert into tblFactura values (@empleado,@nombreCliente,@fechaEmision,@tipoFactura, @NCF, @subtotal, @impuesto, @totalPagar)
 go
 
-exec procCrearFacturaNCF '','','','','NCF'
-
-
 -- Tabla DetalleFactura --
 create table tblDetalleFactura
 (
@@ -103,8 +94,6 @@ fechaEmision datetime,
 montoITBIS money default ' ',
 totalPagar money default ' '
 )
-
-select *from tblDetalleFactura
 
 -- PROCEDIMIENTO AGREGAR ARTÍCULOS
 create proc procLlamarArt
@@ -126,12 +115,10 @@ update tblFactura set NCF = @NCF
 where codigoFactura like @NCF
 go 
 
-exec procAgregarNCF 1,'1'
-
 -- PROCEDIMIENTO PARA MOSTRAR ARTÍCULOS
 create proc procMostrarArt
 as
-select articulo as 'Artículo', cantidad as 'Cantidad' , precio as 'Precio', totalArt as 'Total por artículo', NCF as 'NCF'
+select articulo as 'Artículo', cantidad as 'Cantidad' , precio as 'Precio', totalArt as 'Total por artículo'
 from tblDetalleFactura
 go
 
@@ -155,5 +142,3 @@ as
 select articulo as 'Artículo', cantidad as 'Cantidad' , precio as 'Precio', totalArt as 'Total por artículo', NCF as 'NCF', montoITBIS as 'ITBIS', totalPagar as 'Total a pagar'
 from tblDetalleFactura
 go
-
-select *from tblDetalleFactura
