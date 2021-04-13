@@ -123,12 +123,12 @@ namespace CapaPresentacion
                 pfs.Add(pf);
 
 
-                oRep.Load(@"C:\Users\Leone\Source\Repos\samyrd309\IDS340-Sistema-Facturacion\SistemaFacturacion\CapaPresentacion\RptFactura.rpt");
+                oRep.Load(@"C:\Users\Deivy\Source\Repos\IDS340-Sistema-Facturacion\SistemaFacturacion\CapaPresentacion\rptFactura.rpt");
                 form.crystalReportViewer1.ReportSource = oRep;
                 form.Show();
 
                 //Exportar Reporte a PDF
-                oRep.ExportToDisk(ExportFormatType.PortableDocFormat, @"C:\Users\Leone\Downloads\factura.pdf");
+                oRep.ExportToDisk(ExportFormatType.PortableDocFormat, @"C:\Users\Deivy\Downloads\factura.pdf");
                 #endregion
 
             }

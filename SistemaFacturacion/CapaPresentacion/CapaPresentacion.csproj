@@ -61,10 +61,10 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RptFactura.cs">
+    <Compile Include="rptFactura.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>RptFactura.rpt</DependentUpon>
+      <DependentUpon>rptFactura.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="VentanaFacturacion.cs">
@@ -85,9 +85,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="RptFactura.rpt">
+    <EmbeddedResource Include="rptFactura.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>RptFactura.cs</LastGenOutput>
+      <LastGenOutput>rptFactura.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="VentanaFacturacion.resx">
       <DependentUpon>VentanaFacturacion.cs</DependentUpon>
